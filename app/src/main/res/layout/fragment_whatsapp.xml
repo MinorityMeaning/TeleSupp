@@ -7,25 +7,30 @@
     android:id="@+id/fl_whatsapp"
     tools:context="com.example.helloapp.MainActivity"
     >
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/lineNumber1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
 
         <EditText
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
+            android:id="@+id/edit_phone"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
-
-            android:inputType="textPersonName"
-            android:hint="Введите текст"
-            app:layout_constraintRight_toLeftOf="@+id/button"
+            android:hint="7 xxx xxx xx xx"
+            android:inputType="phone"
+            android:layout_width="170dp"
+            android:maxLength="15"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-        />
+            app:layout_constraintRight_toLeftOf="@+id/button"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button"
@@ -43,6 +48,29 @@
 
         />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lineNumber2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/lineNumber1"
+        >
+
+
+        <EditText
+            android:id="@+id/edit_message"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите сообщение"
+            android:inputType="textMultiLine"
+            android:lines="5"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+        />
+    </LinearLayout>
+</LinearLayout>
+
 
     <TextView
         android:id="@+id/tv_home"
