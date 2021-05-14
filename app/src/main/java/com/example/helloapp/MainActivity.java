@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -91,12 +92,15 @@ public class MainActivity extends AppCompatActivity {
 
         String phone = editPhone.getText().toString();
         String message = editMessage.getText().toString();
+        if (phone.equals("") || message.equals("")) return;
         //Подготовим содержимое запроса
         //postBody="{\n" +
         //        "    \"phone\": \"" + phone + "\",\n" +
         //        "    \"message\": \"" + message + "\"\n" +
         //        "}";
         //Пробуем сделать запрос
+        new TimerButton(findViewById(R.id.button)).start();// Выключим кнопку на 15 секунд
+
         try {
             postRequest(postUrl, phone, message);
         } catch (IOException e) {

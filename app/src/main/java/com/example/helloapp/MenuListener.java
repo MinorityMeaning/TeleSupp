@@ -9,11 +9,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MenuListener implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    MenuListener(MainActivity mainActivity){
+    private MainActivity mainActivity;
+
+    public MenuListener(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
-
-    private MainActivity mainActivity;
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

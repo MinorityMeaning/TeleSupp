@@ -32,21 +32,19 @@
             app:layout_constraintRight_toLeftOf="@+id/button"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
 
-        android:onClick="sendMessage"
-        android:text="Отправить"
+            android:onClick="sendMessage"
+            android:text="@string/send"
+            app:layout_constraintLeft_toRightOf="@+id/editText"
 
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/editText"
-        app:layout_constraintTop_toTopOf="parent"
-
-        />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
 
     <LinearLayout

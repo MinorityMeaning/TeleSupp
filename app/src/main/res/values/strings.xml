@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TeleSupp</string>
+    <string name="send">Отправить</string>
+    <string name="wait">Ждите</string>
 </resources>
