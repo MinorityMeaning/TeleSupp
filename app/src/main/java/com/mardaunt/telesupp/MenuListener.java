@@ -1,10 +1,10 @@
-package com.example.helloapp;
+package com.mardaunt.telesupp;
 
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import com.example.helloapp.fragments.WhatsAppFragment;
+import com.mardaunt.telesupp.fragments.WhatsAppFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MenuListener implements BottomNavigationView.OnNavigationItemSelectedListener {

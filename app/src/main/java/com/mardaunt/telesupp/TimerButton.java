@@ -1,4 +1,4 @@
-package com.example.helloapp;
+package com.mardaunt.telesupp;
 
 import android.annotation.SuppressLint;
 import android.os.CountDownTimer;

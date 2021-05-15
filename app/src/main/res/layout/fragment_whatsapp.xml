@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fl_whatsapp"
-    tools:context="com.example.helloapp.MainActivity"
+    tools:context="com.mardaunt.telesupp.MainActivity"
     >
 <LinearLayout
     android:layout_width="fill_parent"

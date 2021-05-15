@@ -1,4 +1,4 @@
-package com.example.helloapp.fragments;
+package com.mardaunt.telesupp.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
-import com.example.helloapp.R;
+import com.mardaunt.telesupp.R;
 
 public class WhatsAppFragment extends Fragment {
     public WhatsAppFragment() { }

@@ -1,20 +1,14 @@
-package com.example.helloapp;
+package com.mardaunt.telesupp;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -25,7 +19,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-import com.example.helloapp.fragments.WhatsAppFragment;
+import com.mardaunt.telesupp.fragments.WhatsAppFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
