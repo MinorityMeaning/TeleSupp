@@ -1,5 +1,22 @@
 <resources>
-    <string name="app_name">TeleSupp</string>
-    <string name="send">Отправить</string>
-    <string name="wait">Ждите</string>
+    <string name="app_name" translatable="false">TeleSupp</string>
+    <string name="send">Send</string>
+    <string name="wait">Wait</string>
+    <string name="unput_message">Input Message</string>
+    <string name="_7_xxx_xxx_xx_xx">+7 xxx xxx xx xx</string>
+    <string name="anonim">Send anonymously</string>
+    <string name="sec">Sec</string>
+    <string name="pause">Pause</string>
+    <string name="whatsapp" translatable="false">WhatsApp</string>
+    <string name="telegram" translatable="false">Telegram</string>
+    <string name="history">History</string>
+    <string name="setting">Setting</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="language">Lenguage</string>
+    <string name="english" translatable="false">English</string>
+    <string name="russian">Russian</string>
+    <string name="status_send">Message sent</string>
+    <string name="_x_xxx_xxx_xx_xx">+ xxx xxx xx xx</string>
+    <string name="future_updates" translatable="false">It will open in future updates.</string>
 </resources>

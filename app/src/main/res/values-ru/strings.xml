@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="send" translatable="false">Отправить</string>
+    <string name="wait">Ждите</string>
+    <string name="unput_message">Введите сообщение</string>
+    <string name="anonim">Отправить анонимно</string>
+    <string name="pause">Пауза</string>
+    <string name="_7_xxx_xxx_xx_xx">7 xxx xxx xx xx</string>
+    <string name="sec">Сек</string>
+    <string name="history">История</string>
+    <string name="setting">Настройки</string>
+    <string name="language">Язык</string>
+    <string name="russian">Русский</string>
+    <string name="status_send">Сообщение отправлено</string>
+    <string name="_x_xxx_xxx_xx_xx">+ xxx xxx xx xx</string>
+</resources>

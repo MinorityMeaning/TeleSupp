@@ -4,6 +4,8 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.mardaunt.telesupp.fragments.SettingFragment;
 import com.mardaunt.telesupp.fragments.WhatsAppFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -23,13 +25,13 @@ public class MenuListener implements BottomNavigationView.OnNavigationItemSelect
                 loadFragment(WhatsAppFragment.newInstance());
                 return true;
             case R.id.navigation_telegram:
-                loadFragment(WhatsAppFragment.newInstance());
+                loadFragment(DevelopFragment.newInstance(null, null));
                 return true;
             case R.id.navigation_history:
-                loadFragment(WhatsAppFragment.newInstance());
+                loadFragment(DevelopFragment.newInstance(null, null));
                 return true;
             case R.id.navigation_setting:
-                loadFragment(WhatsAppFragment.newInstance());
+                loadFragment(SettingFragment.newInstance(null, null));
                 return true;
         }
         return false;

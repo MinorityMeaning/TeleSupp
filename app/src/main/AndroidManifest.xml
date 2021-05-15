@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HelloApp"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.mardaunt.telesupp.MessageActivity" />
         <activity android:name="com.mardaunt.telesupp.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

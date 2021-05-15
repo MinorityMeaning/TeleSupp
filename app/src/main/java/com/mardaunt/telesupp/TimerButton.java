@@ -1,35 +1,37 @@
 package com.mardaunt.telesupp;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
 import android.os.CountDownTimer;
 import android.widget.Button;
 
 public class TimerButton extends CountDownTimer {
 
     private final Button button;
-    private boolean colorFlag = true;
+    private boolean activeFlag = true;
+    private MainActivity mainActivity;
 
-    TimerButton(Button button) {
-        super(6000,1000);
+    TimerButton(Button button, MainActivity mainActivity) {
+        super(8000,1000);
         this.button = button;
+        this.mainActivity = mainActivity;
     }
 
 
-    @SuppressLint({"SetTextI18n", "ResourceAsColor"})
+
+    @SuppressLint("SetTextI18n")
     @Override
     public void onTick(long millisUntilFinished) {
-        if (colorFlag) {button.setBackgroundColor(R.color.off_button);
+        if (activeFlag) {
             button.setClickable(false);
-            colorFlag = false;
+            activeFlag = false;
         }
-        button.setText("Пауза " + millisUntilFinished/1000 + " сек");
+        button.setText(mainActivity.getString(R.string.pause) + " " + millisUntilFinished/1000 + " " + mainActivity.getString(R.string.sec));
     }
 
-    @SuppressLint("ResourceAsColor")
     @Override
     public void onFinish() {
         button.setClickable(true);
-        button.setBackgroundColor(R.color.purple_700); // Не работает, почему?
         button.setText(R.string.send);
     }
 }

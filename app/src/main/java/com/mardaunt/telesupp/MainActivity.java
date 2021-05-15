@@ -4,11 +4,17 @@ package com.mardaunt.telesupp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -17,6 +23,10 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import ru.tinkoff.decoro.MaskImpl;
+import ru.tinkoff.decoro.slots.PredefinedSlots;
+import ru.tinkoff.decoro.watchers.FormatWatcher;
+import ru.tinkoff.decoro.watchers.MaskFormatWatcher;
 
 
 import com.mardaunt.telesupp.fragments.WhatsAppFragment;
@@ -43,8 +53,15 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         MenuListener menuListener = new MenuListener(this);
         navigation.setOnNavigationItemSelectedListener(menuListener);
+    }
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Установим маску телефона.
+        MaskPhone.setUpMaskRu(findViewById(R.id.edit_phone));
+        ToggleButton toggle = findViewById(R.id.toggle_ru_mask);
+        toggle.setChecked(true);
     }
 
     void postRequest(String postUrl,String phone, String message) throws IOException {
@@ -78,8 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
     //ОнКлик кнопки "Отправить"
     public void sendMessage(View view){
-        // Создаем объект Intent для вызова новой Activity
-        //Intent intent = new Intent(this, MessageActivity.class);
+
         // Получаем текстовое поле в текущей Activity
         EditText editPhone = (EditText) findViewById(R.id.edit_phone);
         EditText editMessage = (EditText) findViewById(R.id.edit_message);
@@ -87,29 +103,48 @@ public class MainActivity extends AppCompatActivity {
         String phone = editPhone.getText().toString();
         String message = editMessage.getText().toString();
         if (phone.equals("") || message.equals("")) return;
-        //Подготовим содержимое запроса
-        //postBody="{\n" +
-        //        "    \"phone\": \"" + phone + "\",\n" +
-        //        "    \"message\": \"" + message + "\"\n" +
-        //        "}";
-        //Пробуем сделать запрос
-        new TimerButton(findViewById(R.id.button)).start();// Выключим кнопку на 15 секунд
+        // Проверяем отправку через клиентский WhatsApp
+        CheckBox checkBox = findViewById(R.id.anonim);
+        if(!checkBox.isChecked()) {(new SendOnWhatsApp(phone, message, this)).send(); return;}
 
+        //Если checkBox отмечен то продолжим серверную отправку.
+        new TimerButton( (Button) view, this).start();// Выключим кнопку на 8 секунд
+        //Пробуем сделать запрос
         try {
             postRequest(postUrl, phone, message);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // Добавляем с помощью свойства putExtra объект - первый параметр - ключ,
-        // второй параметр - значение этого объекта
-        //intent.putExtra("message", message + phone);
-        //startActivity(intent);
-        //Очищаем поля после отправки.
+
         editPhone.setText("");
         editMessage.setText("");
-        TextView status = findViewById(R.id.home_text);
-        status.setText("Вроде удалось отправить!");
+        //TextView status = findViewById(R.id.home_text);
+        Toast.makeText(this, getString(R.string.status_send), Toast.LENGTH_LONG).show();
+        //status.setText("Удалось отправить!");
 
+    }
+    // ОнКлик включателя маски для РФ
+    public void onToggleRuMask(View view) {
+        boolean on = ((ToggleButton) view).isChecked();
+        if (on) {
+            MaskPhone.setUpMaskRu(findViewById(R.id.edit_phone));
+            ToggleButton toggle = findViewById(R.id.toggle_all_mask);
+            toggle.setChecked(false);
+            EditText input = findViewById(R.id.edit_phone);
+            input.setHint(R.string._7_xxx_xxx_xx_xx);
+        }
+    }
+
+    // ОнКлик включателя маски для всех стран
+    public void onToggleAllMask(View view) {
+        boolean on = ((ToggleButton) view).isChecked();
+        if (on) {
+            MaskPhone.setUpMaskAll(findViewById(R.id.edit_phone));
+            ToggleButton toggle = findViewById(R.id.toggle_ru_mask);
+            toggle.setChecked(false);
+            EditText input = findViewById(R.id.edit_phone);
+            input.setHint(R.string._x_xxx_xxx_xx_xx);
+        }
     }
 
 }

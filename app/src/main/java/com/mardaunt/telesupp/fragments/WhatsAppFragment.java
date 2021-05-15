@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
+import com.mardaunt.telesupp.MainActivity;
 import com.mardaunt.telesupp.R;
 
 public class WhatsAppFragment extends Fragment {
@@ -16,7 +17,13 @@ public class WhatsAppFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        System.out.println();
         return inflater.inflate(R.layout.fragment_whatsapp, container, false);
     }
 }

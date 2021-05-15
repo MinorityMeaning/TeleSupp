@@ -23,51 +23,74 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
-            android:hint="7 xxx xxx xx xx"
+            android:layout_marginRight="10dp"
+            android:hint="@string/_7_xxx_xxx_xx_xx"
             android:inputType="phone"
             android:layout_width="170dp"
-            android:maxLength="15"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/button"
-            app:layout_constraintTop_toTopOf="parent" />
+            />
 
-        <Button
-            android:id="@+id/button"
+        <ToggleButton
+            android:id="@+id/toggle_ru_mask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="6dp"
+            android:minWidth="65dip"
+            android:onClick="onToggleRuMask"
+            android:textAllCaps="false"
+            android:textOff="Ru"
+            android:textOn="Ru" />
 
-            android:onClick="sendMessage"
-            android:text="@string/send"
-            app:layout_constraintLeft_toRightOf="@+id/editText"
+        <ToggleButton
+            android:id="@+id/toggle_all_mask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:minWidth="65dip"
+            android:onClick="onToggleAllMask"
+            android:textOff="All"
+            android:textOn="All" />
 
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lineNumber2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/lineNumber1"
-        >
-
 
         <EditText
             android:id="@+id/edit_message"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Введите сообщение"
+            android:hint="@string/unput_message"
             android:inputType="textMultiLine"
-            android:lines="5"
+            android:lines="4"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
         />
-    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/anonim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="@string/anonim"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:onClick="sendMessage"
+            android:text="@string/send"
+             />
+    </RelativeLayout>
+
 </LinearLayout>
+
 
 
     <TextView
@@ -75,6 +98,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:text="Отправка панель" />
+        android:text="" />
 
 </FrameLayout>
