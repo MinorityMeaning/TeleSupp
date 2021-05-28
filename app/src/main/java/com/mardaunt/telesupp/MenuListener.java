@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.mardaunt.telesupp.fragments.DevelopFragment;
 import com.mardaunt.telesupp.fragments.SettingFragment;
 import com.mardaunt.telesupp.fragments.WhatsAppFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

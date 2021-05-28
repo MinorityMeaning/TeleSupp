@@ -17,6 +17,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Call;
@@ -32,11 +33,14 @@ import ru.tinkoff.decoro.watchers.MaskFormatWatcher;
 import com.mardaunt.telesupp.fragments.WhatsAppFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
-    public String postUrl= "http://94.228.117.187:8083/send_app";
+    public String postUrl= "http://94.228.114.114:8080/test";
 
     //public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
@@ -66,9 +70,11 @@ public class MainActivity extends AppCompatActivity {
 
     void postRequest(String postUrl,String phone, String message) throws IOException {
 
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
 
+        /*
         //RequestBody body = RequestBody.create(JSON, postBody);
+        MediaType mediaType = MediaType.parse("text/plain");
         RequestBody body = new FormBody.Builder()
                 .add("phone", phone)
                 .add("message", message)
@@ -76,9 +82,26 @@ public class MainActivity extends AppCompatActivity {
 
         Request request = new Request.Builder()
                 .url(postUrl)
-                .post(body)
+                .method("POST", body)
                 .build();
         //System.out.println(request);
+*/
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("phone", phone);
+            jsonObject.put("message", message);
+            jsonObject.put("service", "WhatsApp");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody body = RequestBody.create(mediaType, jsonObject.toString());
+        Request request = new Request.Builder()
+                .url(postUrl)
+                .method("POST", body)
+                .addHeader("Content-Type", "application/json")
+                .build();
 
         client.newCall(request).enqueue(new Callback() {
             @Override
