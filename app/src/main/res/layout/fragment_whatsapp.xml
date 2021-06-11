@@ -38,6 +38,7 @@
             android:minWidth="65dip"
             android:onClick="onToggleRuMask"
             android:textAllCaps="false"
+            android:textColor="#706C6C"
             android:textOff="Ru"
             android:textOn="Ru" />
 
@@ -48,6 +49,7 @@
             android:layout_marginTop="16dp"
             android:minWidth="65dip"
             android:onClick="onToggleAllMask"
+            android:textColor="#706C6C"
             android:textOff="All"
             android:textOn="All" />
 
@@ -76,17 +78,21 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:text="@string/anonim"
+            android:textColor="#706C6C"
             android:textSize="14sp" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
             android:onClick="sendMessage"
             android:text="@string/send"
-             />
+            android:textColor="?android:attr/textColorSecondaryInverse"
+            app:backgroundTint="@color/grey_sweet_500"
+            app:icon="@drawable/ic_baseline_send_24"
+            app:iconTint="?android:attr/textColorSecondaryInverse" />
     </RelativeLayout>
 
 </LinearLayout>

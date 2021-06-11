@@ -4,7 +4,7 @@
     <string name="wait">Wait</string>
     <string name="unput_message">Input Message</string>
     <string name="_7_xxx_xxx_xx_xx">+7 xxx xxx xx xx</string>
-    <string name="anonim">Send anonymously</string>
+    <string name="anonim">Remotely</string>
     <string name="sec">Sec</string>
     <string name="pause">Pause</string>
     <string name="whatsapp" translatable="false">WhatsApp</string>
@@ -19,4 +19,5 @@
     <string name="status_send">Message sent</string>
     <string name="_x_xxx_xxx_xx_xx">+ xxx xxx xx xx</string>
     <string name="future_updates" translatable="false">It will open in future updates.</string>
+    <string name="user_id">User Id</string>
 </resources>

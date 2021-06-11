@@ -9,4 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="off_button">#653700B3</color>
 
+    <color name="grey_sweet_700">#FF081C30</color>
+    <color name="grey_sweet_500">#FF4A5563</color>
+
+
 </resources>

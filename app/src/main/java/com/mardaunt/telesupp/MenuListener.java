@@ -1,6 +1,8 @@
 package com.mardaunt.telesupp;
 
 import android.view.MenuItem;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -13,9 +15,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MenuListener implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private MainActivity mainActivity;
+    private UserData userData;
 
-    public MenuListener(MainActivity mainActivity) {
+    public MenuListener(MainActivity mainActivity, UserData userData) {
         this.mainActivity = mainActivity;
+        this.userData = userData;
     }
 
     @Override
@@ -32,7 +36,7 @@ public class MenuListener implements BottomNavigationView.OnNavigationItemSelect
                 loadFragment(DevelopFragment.newInstance(null, null));
                 return true;
             case R.id.navigation_setting:
-                loadFragment(SettingFragment.newInstance(null, null));
+                loadFragment(SettingFragment.newInstance(null, null, userData));
                 return true;
         }
         return false;

@@ -7,8 +7,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import com.mardaunt.telesupp.MainActivity;
 import com.mardaunt.telesupp.R;
+import com.mardaunt.telesupp.UserData;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,9 +29,12 @@ public class SettingFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private UserData userData;
+    private MainActivity mainActivity;
 
-    public SettingFragment() {
+    public SettingFragment(UserData userData) {
         // Required empty public constructor
+        this.userData = userData;
     }
 
     /**
@@ -39,8 +46,8 @@ public class SettingFragment extends Fragment {
      * @return A new instance of fragment SettingFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SettingFragment newInstance(String param1, String param2) {
-        SettingFragment fragment = new SettingFragment();
+    public static SettingFragment newInstance(String param1, String param2, UserData userData) {
+        SettingFragment fragment = new SettingFragment(userData);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,7 +67,11 @@ public class SettingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setting, container, false);
+            // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_setting, container, false);
+            // Напечатаем id пользователя в TextView
+        TextView textUserId = view.findViewById(R.id.setting_user_id);
+        textUserId.setText(userData.getUserId());
+        return view;
     }
 }
