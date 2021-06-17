@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
             jsonObject.put("message", message);
             jsonObject.put("service", "WhatsApp");
             jsonObject.put("user", userData.getUserId());
+            jsonObject.put("status", "ok"); // Багаж для исполнителя automagic
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -107,10 +108,10 @@ public class MainActivity extends AppCompatActivity {
     public void sendMessage(View view){
 
             // Получаем текстовое поле в текущей Activity
-        EditText editPhone = (EditText) findViewById(R.id.edit_phone);
-        EditText editMessage = (EditText) findViewById(R.id.edit_message);
+        EditText editPhone = findViewById(R.id.edit_phone);
+        EditText editMessage = findViewById(R.id.edit_message);
 
-        String phone = editPhone.getText().toString();
+        String phone = editPhone.getText().toString().replaceAll("[()\\s|-]+","");
         String message = editMessage.getText().toString();
         if (phone.equals("") || message.equals("")) return;
             // Проверяем отправку через клиентский WhatsApp
