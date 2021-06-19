@@ -15,11 +15,13 @@ public class UserData {
 
     private final MainActivity mainActivity;
     private SharedPreferences sPref;
+    private SharedPreferences.Editor editor;
     final private String USER_ID = "user_id";
+
 
     void createUser() {
         sPref = mainActivity.getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sPref.edit();
+        editor = sPref.edit();
             // Если user id уже есть, выходим из метода
         if(sPref.contains(USER_ID)) return;
         editor.putString(USER_ID, createUserId());
@@ -36,4 +38,11 @@ public class UserData {
     public String getUserId() {
         return sPref.getString(USER_ID, "");
     }
+
+    public void addLastReceive(String phone, String message) {
+        editor.putString("last_receive", phone + ": " + message);
+        editor.apply();
+    }
+
+    public String getLastReceive() {return sPref.getString("last_receive", "none");}
 }

@@ -1,12 +1,15 @@
 package com.mardaunt.telesupp;
 
-import android.util.Log;
+import android.annotation.SuppressLint;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -15,21 +18,40 @@ import okhttp3.Response;
 public class ReceiveMessage {
     OkHttpClient client = new OkHttpClient().newBuilder()
             .build();
+    String answer;
+    JSONObject json;
 
-    private JSONObject getReceiveRequest(String url, String user) {
-        JSONObject receive;
+
+    public void getReceiveRequest(String user, UserData userData) {
+        //JSONObject receive;
         Request request = new Request.Builder()
-                .url(url + "/tuk_tuk/" + user)
+                .url("http://192.168.0.10:8080/tuk_tuk/" + user)
                 .method("GET", null)
                 .build();
-        try {
-            Response response = client.newCall(request).execute();
-            assert response.body() != null;
-            receive = new JSONObject(String.valueOf(response));
-        } catch (IOException | JSONException e) {
-            Log.d("error_responce", e.getMessage());
-            receive = new JSONObject();
-        }
-        return receive;
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                call.cancel();
+            }
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                assert response.body() != null;
+                 answer = response.body().string();
+                 System.out.println(answer);
+                    try {
+                        json = new JSONObject(answer);
+                        if (json.length() != 1)
+                            userData.addLastReceive(json.getString("phone"), json.getString("message"));
+                        System.out.println("Длина: " + json.length());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        System.out.println("Do not created json");
+                    }
+                //Log.d("TAG",response.body().string());
+            }
+        });
     }
 }

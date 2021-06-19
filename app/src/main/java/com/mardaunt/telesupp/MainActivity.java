@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     public String postUrl= "http://192.168.0.10:8080/add_message";
     private UserData userData;
+    private ReceiveMessage receiveMessage;
 
     //public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(menuListener);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onStart() {
         super.onStart();
@@ -65,9 +67,14 @@ public class MainActivity extends AppCompatActivity {
         MaskPhone.setUpMaskRu(findViewById(R.id.edit_phone));
         ToggleButton toggle = findViewById(R.id.toggle_ru_mask);
         toggle.setChecked(true);
+        //Объект для запросов входящих сообщений
+        receiveMessage = new ReceiveMessage();
+        receiveMessage.getReceiveRequest(userData.getUserId(), userData);
+        TextView answerView = findViewById(R.id.answear);
+        answerView.setText(userData.getLastReceive());
     }
 
-    private void postRequest(String postUrl,String phone, String message) throws IOException {
+    private void postRequest(String postUrl,String phone, String message) {
 
         OkHttpClient client = new OkHttpClient().newBuilder().build();
 
@@ -121,11 +128,7 @@ public class MainActivity extends AppCompatActivity {
             //Если checkBox отмечен то продолжим серверную отправку.
         new TimerButton( (Button) view, this).start();// Выключим кнопку на 8 секунд
             //Пробуем сделать запрос
-        try {
-            postRequest(postUrl, phone, message);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        postRequest(postUrl, phone, message);
 
         editMessage.setText("");
         Toast.makeText(this, getString(R.string.status_send), Toast.LENGTH_LONG).show();
