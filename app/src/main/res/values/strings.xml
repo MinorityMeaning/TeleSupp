@@ -19,5 +19,5 @@
     <string name="status_send">Message sent</string>
     <string name="_x_xxx_xxx_xx_xx">+ xxx xxx xx xx</string>
     <string name="future_updates" translatable="false">It will open in future updates.</string>
-    <string name="user_id">User Id</string>
+    <string name="user_id" translatable="false">User Id</string>
 </resources>
