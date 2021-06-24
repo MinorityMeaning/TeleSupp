@@ -6,6 +6,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +29,8 @@ import okhttp3.Response;
 
 import com.mardaunt.telesupp.fragments.WhatsAppFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.mardaunt.telesupp.sqlite.BaseActions;
+import com.mardaunt.telesupp.sqlite.FeedReaderDbHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
     public String postUrl= "http://192.168.0.10:8080/add_message";
     private UserData userData;
     private ReceiveMessage receiveMessage;
+    FeedReaderDbHelper dbHelper;
+    SQLiteDatabase db;
+    BaseActions baseActions;
 
     //public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
@@ -68,10 +75,20 @@ public class MainActivity extends AppCompatActivity {
         ToggleButton toggle = findViewById(R.id.toggle_ru_mask);
         toggle.setChecked(true);
         //Объект для запросов входящих сообщений
-        receiveMessage = new ReceiveMessage();
-        receiveMessage.getReceiveRequest(userData.getUserId(), userData);
+        //receiveMessage = new ReceiveMessage();
+        //receiveMessage.getReceiveRequest(userData.getUserId(), userData);
         TextView answerView = findViewById(R.id.answear);
-        answerView.setText(userData.getLastReceive());
+        //answerView.setText(userData.getLastReceive());
+
+        //SQLite
+        dbHelper = new FeedReaderDbHelper(this);
+        db = dbHelper.getWritableDatabase();
+        baseActions = new BaseActions(db);
+        Cursor cursor = baseActions.getMessages();
+        if(cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            answerView.setText(cursor.getString(2));
+        }
     }
 
     private void postRequest(String postUrl,String phone, String message) {
@@ -121,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
         String phone = editPhone.getText().toString().replaceAll("[()\\s|-]+","");
         String message = editMessage.getText().toString();
         if (phone.equals("") || message.equals("")) return;
+            //Проба добавления в SQlite
+        baseActions.addMessage(phone, message, "outgoing", "WhatsApp", "25.06.2021");
             // Проверяем отправку через клиентский WhatsApp
         CheckBox checkBox = findViewById(R.id.anonim);
         if(!checkBox.isChecked()) {(new SendOnWhatsApp(phone, message, this)).send(); return;}
