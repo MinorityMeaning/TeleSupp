@@ -11,7 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Message.class}, version = 8, exportSchema = false)
+@Database(entities = {Message.class}, version = 9, exportSchema = false)
 public abstract class MessageRoomDatabase extends RoomDatabase {
 
     public abstract MessageDao messageDao();
@@ -26,7 +26,7 @@ public abstract class MessageRoomDatabase extends RoomDatabase {
             synchronized (MessageRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            MessageRoomDatabase.class, "messages_database5")
+                            MessageRoomDatabase.class, "messages_database6")
                             .addCallback(sRoomDatabaseCallback)
                             .build();
                 }

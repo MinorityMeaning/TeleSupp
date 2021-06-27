@@ -27,6 +27,7 @@ public class Message {
                    //@NonNull String service,
                    //@NonNull String date
                     ) {
+        this.id = id;
         this.phone = phone;
         this.text = text;
         //this.mNature = nature;

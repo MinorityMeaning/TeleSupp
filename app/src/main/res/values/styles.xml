@@ -13,8 +13,8 @@
     <style name="word_title">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_marginBottom">8dp</item>
-        <item name="android:paddingLeft">8dp</item>
-        <item name="android:background">@android:color/darker_gray</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:background">@color/grey_sweet_500</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
     </style>
 </resources>

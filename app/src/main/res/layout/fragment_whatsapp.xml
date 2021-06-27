@@ -8,6 +8,7 @@
     tools:context="com.mardaunt.telesupp.MainActivity"
     >
 <LinearLayout
+    android:id="@+id/input_side"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -95,13 +96,13 @@
             app:iconTint="?android:attr/textColorSecondaryInverse" />
     </RelativeLayout>
 
-</LinearLayout>
-
-    <TextView
-        android:id="@+id/answer"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|bottom"
-        android:text="" />
+        android:padding="10dp"
+        tools:listitem="@layout/recyclerview_item" />
+
+</LinearLayout>
 
 </FrameLayout>

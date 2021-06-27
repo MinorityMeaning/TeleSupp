@@ -22,8 +22,8 @@ public class MessageListAdapter extends ListAdapter<Message, MessageViewHolder> 
     @Override
     public void onBindViewHolder(MessageViewHolder holder, int position) {
         Message current = getItem(position);
-        System.out.println(current.getPhone() + " " + current.getText());
-        holder.bind(current.getText()); // Бинтим только тело сообщения! Закладка! Реализовать!
+        //System.out.println(current.getId() + " " + current.getPhone() + " " + current.getText());
+        holder.bind(current.getPhone() ,current.getText()); // Бинтим только тело телефон и сообщение!
     }
 
     public static class MessageDiff extends DiffUtil.ItemCallback<Message> {

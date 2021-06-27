@@ -37,8 +37,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mardaunt.telesupp.recyclerview.MessageListAdapter;
 import com.mardaunt.telesupp.room.Message;
 import com.mardaunt.telesupp.room.MessageViewModel;
-import com.mardaunt.telesupp.sqlite.BaseActions;
-import com.mardaunt.telesupp.sqlite.FeedReaderDbHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,14 +47,7 @@ public class MainActivity extends AppCompatActivity {
     public String postUrl= "http://192.168.0.10:8080/add_message";
     private UserData userData;
     private ReceiveMessage receiveMessage;
-    FeedReaderDbHelper dbHelper;
-    SQLiteDatabase db;
-    BaseActions baseActions;
-    private MessageViewModel mMessageViewModel;
-
-    public static final String EXTRA_REPLY = "com.example.android.wordlistsql.REPLY";
-
-    //public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    MessageViewModel mMessageViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,19 +66,6 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         MenuListener menuListener = new MenuListener(this, userData);
         navigation.setOnNavigationItemSelectedListener(menuListener);
-            //Настраиваем RecyclerView для сообщений
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final MessageListAdapter adapter = new MessageListAdapter(new MessageListAdapter.MessageDiff());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            //Получим ViewModel от ViewModelProvider
-        mMessageViewModel = new ViewModelProvider(this).get(MessageViewModel.class);
-            //Добавим наблюдателя для LiveData
-        mMessageViewModel.getAllMessages().observe(this, messages -> {
-            // Update the cached copy of the words in the adapter.
-            adapter.submitList(messages);
-        });
-
 
     }
 
@@ -95,27 +73,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-            //Установим маску телефона.
-        MaskPhone.setUpMaskRu(findViewById(R.id.edit_phone));
-        ToggleButton toggle = findViewById(R.id.toggle_ru_mask);
-        toggle.setChecked(true);
+
         //Объект для запросов входящих сообщений
         receiveMessage = new ReceiveMessage(mMessageViewModel);
         receiveMessage.getReceiveRequest(userData.getUserId(), userData);
-        //TextView answerView = findViewById(R.id.answer);
-        //answerView.setText(userData.getLastReceive());
 
-    /*
-        //SQLite
-        dbHelper = new FeedReaderDbHelper(this);
-        db = dbHelper.getWritableDatabase();
-        baseActions = new BaseActions(db);
-        Cursor cursor = baseActions.getMessages();
-        if(cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            answerView.setText(cursor.getString(2));
-        }
-        */
+    }
+
+    public void setMessageViewModel(MessageViewModel mVm) {
+        mMessageViewModel = mVm;
+    }
+    public MessageViewModel getMessageViewModel(){
+        return mMessageViewModel;
     }
 
     private void postRequest(String postUrl,String phone, String message) {
@@ -165,16 +134,13 @@ public class MainActivity extends AppCompatActivity {
         String phone = editPhone.getText().toString().replaceAll("[()\\s|-]+","");
         String message = editMessage.getText().toString();
         if (phone.equals("") || message.equals("")) return;
-            //Проба добавления в SQlite. Старый метод.
-        //baseActions.addMessage(phone, message, "outgoing", "WhatsApp", "25.06.2021");
 
             // Проверяем отправку через клиентский WhatsApp
         CheckBox checkBox = findViewById(R.id.anonim);
         if(!checkBox.isChecked()) {(new SendOnWhatsApp(phone, message, this)).send(); return;}
             //Room SQL
-        Message mes = new Message(0, phone, message);
+        Message mes = new Message(0,phone, message);
         mMessageViewModel.insert(mes);
-        //finish();
 
         //Если checkBox отмечен то продолжим серверную отправку.
         new TimerButton( (Button) view, this).start();// Выключим кнопку на 8 секунд
