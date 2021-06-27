@@ -3,6 +3,9 @@ package com.mardaunt.telesupp;
 import android.annotation.SuppressLint;
 import android.widget.TextView;
 
+import com.mardaunt.telesupp.room.Message;
+import com.mardaunt.telesupp.room.MessageViewModel;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,6 +23,11 @@ public class ReceiveMessage {
             .build();
     String answer;
     JSONObject json;
+    MessageViewModel mMessageViewModel;
+
+    ReceiveMessage(MessageViewModel mMessageViewModel) {
+        this.mMessageViewModel = mMessageViewModel;
+    }
 
 
     public void getReceiveRequest(String user, UserData userData) {
@@ -43,8 +51,13 @@ public class ReceiveMessage {
                  System.out.println(answer);
                     try {
                         json = new JSONObject(answer);
-                        if (json.length() != 1)
+                        if (json.length() != 1) {
                             userData.addLastReceive(json.getString("phone"), json.getString("message"));
+                                // Room SQL
+                            System.out.println(json.getString("message"));
+                            //Message mes = new Message(json.getString("phone"), json.getString("message"));
+                            //mMessageViewModel.insert(mes);
+                        }
                         System.out.println("Длина: " + json.length());
                     } catch (JSONException e) {
                         e.printStackTrace();
