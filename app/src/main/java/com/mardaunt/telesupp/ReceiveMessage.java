@@ -54,9 +54,8 @@ public class ReceiveMessage {
                         if (json.length() != 1) {
                             userData.addLastReceive(json.getString("phone"), json.getString("message"));
                                 // Room SQL
-                            System.out.println(json.getString("message"));
-                            //Message mes = new Message(json.getString("phone"), json.getString("message"));
-                            //mMessageViewModel.insert(mes);
+                            Message mes = new Message(0, json.getString("phone"), json.getString("message"));
+                            mMessageViewModel.insert(mes);
                         }
                         System.out.println("Длина: " + json.length());
                     } catch (JSONException e) {
