@@ -27,7 +27,6 @@
             android:layout_height="wrap_content"
             android:paddingRight="10dp"
             android:textSize="11sp"
-            android:text="+79245714142"
             android:textColor="?android:attr/textColorSecondaryInverse"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
