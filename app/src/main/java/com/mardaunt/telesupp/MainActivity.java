@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         CheckBox checkBox = findViewById(R.id.anonim);
         if(!checkBox.isChecked()) {(new SendOnWhatsApp(phone, message, this)).send(); return;}
             //Room SQL
-        Message mes = new Message(0,phone, message);
+        Message mes = new Message(0,phone, message, "outgoing");
         mMessageViewModel.insert(mes);
 
         //Если checkBox отмечен то продолжим серверную отправку.

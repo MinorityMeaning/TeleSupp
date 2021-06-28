@@ -48,7 +48,7 @@ public abstract class MessageRoomDatabase extends RoomDatabase {
                 MessageDao dao = INSTANCE.messageDao();
                 dao.deleteAll();
 
-                Message message = new Message(0,"+794434523456", "Привет! Первое сообщение!");
+                Message message = new Message(0,"+794434523456", "Hello, this incoming message!", "incoming");
                 dao.insert(message);
             });
 

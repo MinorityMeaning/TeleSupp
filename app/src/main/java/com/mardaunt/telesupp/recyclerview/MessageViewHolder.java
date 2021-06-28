@@ -4,9 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.mardaunt.telesupp.R;
 
 class MessageViewHolder extends RecyclerView.ViewHolder {
@@ -24,9 +22,10 @@ class MessageViewHolder extends RecyclerView.ViewHolder {
         messageItemView.setText(message);
     }
 
-    static MessageViewHolder create(ViewGroup parent) {
+        //viewType содержит id для нужного layout.
+    static MessageViewHolder create(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recyclerview_item, parent, false);
+                    .inflate(viewType, parent, false);
         return new MessageViewHolder(view);
     }
 }

@@ -41,7 +41,6 @@ public class WhatsAppFragment extends Fragment {
 
         //Настраиваем RecyclerView для сообщений
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
-        System.out.println(recyclerView == null);
         final MessageListAdapter adapter = new MessageListAdapter(new MessageListAdapter.MessageDiff());
         recyclerView.setAdapter(adapter);
 

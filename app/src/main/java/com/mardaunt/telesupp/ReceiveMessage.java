@@ -31,7 +31,7 @@ public class ReceiveMessage {
 
 
     public void getReceiveRequest(String user, UserData userData) {
-        //JSONObject receive;
+
         Request request = new Request.Builder()
                 .url("http://192.168.0.10:8080/tuk_tuk/" + user)
                 .method("GET", null)
@@ -48,19 +48,16 @@ public class ReceiveMessage {
             public void onResponse(Call call, Response response) throws IOException {
                 assert response.body() != null;
                  answer = response.body().string();
-                 System.out.println(answer);
                     try {
                         json = new JSONObject(answer);
                         if (json.length() != 1) {
-                            userData.addLastReceive(json.getString("phone"), json.getString("message"));
                                 // Room SQL
-                            Message mes = new Message(0, json.getString("phone"), json.getString("message"));
+                            Message mes = new Message(0, json.getString("phone"), json.getString("message"), "incoming");
                             mMessageViewModel.insert(mes);
                         }
                         System.out.println("Длина: " + json.length());
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        System.out.println("Do not created json");
                     }
                 //Log.d("TAG",response.body().string());
             }

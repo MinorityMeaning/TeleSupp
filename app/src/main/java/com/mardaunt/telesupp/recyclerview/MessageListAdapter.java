@@ -1,11 +1,10 @@
 package com.mardaunt.telesupp.recyclerview;
 
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
-
+import com.mardaunt.telesupp.R;
 import com.mardaunt.telesupp.room.Message;
 
 public class MessageListAdapter extends ListAdapter<Message, MessageViewHolder> {
@@ -15,14 +14,21 @@ public class MessageListAdapter extends ListAdapter<Message, MessageViewHolder> 
     }
 
     @Override
+    public int getItemViewType(int position) {
+        if (getItem(position).getNature().equals("outgoing"))
+            return R.layout.recyclerview_item_outgoing;
+        else
+            return R.layout.recyclerview_item_incoming;
+    }
+
+    @Override
     public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return MessageViewHolder.create(parent);
+        return MessageViewHolder.create(parent, viewType);
     }
 
     @Override
     public void onBindViewHolder(MessageViewHolder holder, int position) {
         Message current = getItem(position);
-        //System.out.println(current.getId() + " " + current.getPhone() + " " + current.getText());
         holder.bind(current.getPhone() ,current.getText()); // Бинтим только тело телефон и сообщение!
     }
 
