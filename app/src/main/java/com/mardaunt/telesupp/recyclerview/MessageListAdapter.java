@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import com.mardaunt.telesupp.R;
 import com.mardaunt.telesupp.room.Message;
+import com.mardaunt.telesupp.room.TimeStampConverter;
 
 public class MessageListAdapter extends ListAdapter<Message, MessageViewHolder> {
 
@@ -29,7 +30,10 @@ public class MessageListAdapter extends ListAdapter<Message, MessageViewHolder> 
     @Override
     public void onBindViewHolder(MessageViewHolder holder, int position) {
         Message current = getItem(position);
-        holder.bind(current.getPhone() ,current.getText()); // Бинтим только тело телефон и сообщение!
+
+        holder.bind(current.getPhone(),
+                    current.getText(),
+                    TimeStampConverter.getTime(current.getDate())); // Бинтим телефон сообщение и время.
     }
 
     public static class MessageDiff extends DiffUtil.ItemCallback<Message> {

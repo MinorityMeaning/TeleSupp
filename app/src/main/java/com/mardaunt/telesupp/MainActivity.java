@@ -41,6 +41,7 @@ import com.mardaunt.telesupp.room.MessageViewModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         CheckBox checkBox = findViewById(R.id.anonim);
         if(!checkBox.isChecked()) {(new SendOnWhatsApp(phone, message, this)).send(); return;}
             //Room SQL
-        Message mes = new Message(0,phone, message, "outgoing");
+        Message mes = new Message(0,phone, message, "outgoing", "WhatsApp", new Date());
         mMessageViewModel.insert(mes);
 
         //Если checkBox отмечен то продолжим серверную отправку.

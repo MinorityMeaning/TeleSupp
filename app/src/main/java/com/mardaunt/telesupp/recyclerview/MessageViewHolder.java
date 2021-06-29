@@ -10,16 +10,19 @@ import com.mardaunt.telesupp.R;
 class MessageViewHolder extends RecyclerView.ViewHolder {
     private final TextView phoneItemView;
     private final TextView messageItemView;
+    private final TextView timeItemView;
 
     private MessageViewHolder(View itemView) {
         super(itemView);
         messageItemView = itemView.findViewById(R.id.text_view_message);
         phoneItemView = itemView.findViewById(R.id.text_view_phone);
+        timeItemView = itemView.findViewById(R.id.text_view_time);
     }
 
-    public void bind(String phone, String message) {
+    public void bind(String phone, String message, String time) {
         phoneItemView.setText(phone);
         messageItemView.setText(message);
+        timeItemView.setText(time);
     }
 
         //viewType содержит id для нужного layout.

@@ -1,15 +1,12 @@
 package com.mardaunt.telesupp;
 
 import android.annotation.SuppressLint;
-import android.widget.TextView;
-
 import com.mardaunt.telesupp.room.Message;
 import com.mardaunt.telesupp.room.MessageViewModel;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
+import java.util.Date;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -52,7 +49,11 @@ public class ReceiveMessage {
                         json = new JSONObject(answer);
                         if (json.length() != 1) {
                                 // Room SQL
-                            Message mes = new Message(0, json.getString("phone"), json.getString("message"), "incoming");
+                            Message mes = new Message(0, json.getString("phone"),
+                                                            json.getString("message"),
+                                                    "incoming",
+                                                    "WhatsApp",
+                                                            new Date());
                             mMessageViewModel.insert(mes);
                         }
                         System.out.println("Длина: " + json.length());

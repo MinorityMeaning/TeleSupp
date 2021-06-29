@@ -43,8 +43,10 @@ public class WhatsAppFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
         final MessageListAdapter adapter = new MessageListAdapter(new MessageListAdapter.MessageDiff());
         recyclerView.setAdapter(adapter);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            //Настроим прокрутку до последнего сообщения.
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
             //Получим ViewModel от ViewModelProvider
         MessageViewModel mMessageViewModel = new ViewModelProvider(this).get(MessageViewModel.class);
             //Добавим наблюдателя для LiveData

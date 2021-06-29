@@ -6,12 +6,15 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {Message.class}, version = 9, exportSchema = false)
+@TypeConverters({TimeStampConverter.class})
 public abstract class MessageRoomDatabase extends RoomDatabase {
 
     public abstract MessageDao messageDao();
@@ -48,7 +51,11 @@ public abstract class MessageRoomDatabase extends RoomDatabase {
                 MessageDao dao = INSTANCE.messageDao();
                 dao.deleteAll();
 
-                Message message = new Message(0,"+794434523456", "Hello, this incoming message!", "incoming");
+                Message message = new Message(0,"+794434523456",
+                                                     "Hello, this incoming message!",
+                                                    "incoming",
+                                                    "WhatsApp",
+                                                            new Date());
                 dao.insert(message);
             });
 
