@@ -4,7 +4,8 @@
     <item
         android:id="@+id/navigation_whatsapp"
         android:icon="@drawable/ic_whatsapp"
-        android:title="@string/whatsapp" />
+        android:title="@string/whatsapp"
+        />
 
     <item
         android:id="@+id/navigation_telegram"

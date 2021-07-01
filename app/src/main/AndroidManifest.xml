@@ -12,8 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HelloApp"
-        android:usesCleartextTraffic="true">
-        <activity android:name="com.mardaunt.telesupp.MainActivity">
+        android:usesCleartextTraffic="true"
+        >
+
+        <activity android:name="com.mardaunt.telesupp.MainActivity"
+                  android:windowSoftInputMode="adjustPan"
+                  android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

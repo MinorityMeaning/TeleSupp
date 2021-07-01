@@ -7,19 +7,29 @@
     android:id="@+id/fl_whatsapp"
     tools:context="com.mardaunt.telesupp.MainActivity"
     >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_bitmap" />
+
 <LinearLayout
     android:id="@+id/input_side"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lineNumber1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/grey_sweet_500"
+        android:background="@drawable/shadow_bottom"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        android:elevation="2dp"
+        >
 
         <EditText
             android:id="@+id/edit_phone"
@@ -114,10 +124,15 @@
         <CheckBox
             android:id="@+id/anonim"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
+            android:background="@drawable/rounded_edit_text"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:text="@string/anonim"
-            android:textColor="#706C6C"
-            android:textSize="14sp" />
+            android:textColor="#ACACAC"
+            android:textSize="14sp"
+             />
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView

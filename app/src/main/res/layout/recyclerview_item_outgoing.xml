@@ -21,14 +21,15 @@
         android:paddingRight="20dp"
         android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        android:elevation="2dp"
+        >
 
         <TextView
             android:id="@+id/text_view_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="10dp"
-            android:text="+79245714142"
             android:textColor="@color/teal_700"
             android:textSize="11sp"
             app:layout_constraintStart_toStartOf="parent"

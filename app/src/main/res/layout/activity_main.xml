@@ -22,7 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/grey_sweet_500"
+        android:background="@drawable/shadow_top"
+        android:elevation="2dp"
         app:itemIconTint="?android:attr/textColorSecondaryInverse"
         app:itemTextColor="?android:attr/textColorSecondaryInverse"
         app:menu="@menu/navigation" />
