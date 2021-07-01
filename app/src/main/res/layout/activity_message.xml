@@ -1,41 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:weightSum="1"
+    android:padding="50dp"
+    android:background="@color/grey_sweet_500">
 
-    <TextView
-        android:id="@+id/messageText"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/text_edit_layout_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Здравствуйте, уважаемые!"
-        android:textSize = "18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:hint="@string/_7_xxx_xxx_xx_xx"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        app:boxBackgroundColor="@color/white"
+        >
 
-    <TextView
-        android:id="@+id/text_message_incoming"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_speech_bubble_incoming"
-        android:lineSpacingExtra="2dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="4dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:text="Hi, How are you?"
-        android:textColor="@color/grey_sweet_500"
-        android:textSize="13.5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_max="wrap"
-        app:layout_constraintWidth_percent="0.8" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_phone"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

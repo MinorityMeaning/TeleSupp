@@ -13,59 +13,98 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lineNumber1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        >
+        android:background="@color/grey_sweet_500"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
 
         <EditText
             android:id="@+id/edit_phone"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/rounded_edit_text"
             android:hint="@string/_7_xxx_xxx_xx_xx"
-            android:inputType="phone" />
+            android:inputType="phone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <ToggleButton
             android:id="@+id/toggle_ru_mask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="6dp"
             android:minWidth="65dip"
             android:onClick="onToggleRuMask"
             android:textAllCaps="false"
             android:textColor="#706C6C"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:textOff="Ru"
-            android:textOn="Ru" />
+            android:textOn="Ru"
+            app:layout_constraintStart_toEndOf="@+id/edit_phone"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <ToggleButton
             android:id="@+id/toggle_all_mask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:minWidth="65dip"
             android:onClick="onToggleAllMask"
             android:textColor="#706C6C"
             android:textOff="All"
-            android:textOn="All" />
+            android:textOn="All"
+            app:layout_constraintStart_toEndOf="@+id/toggle_ru_mask"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
 
         <EditText
             android:id="@+id/edit_message"
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_edit_text"
             android:hint="@string/unput_message"
             android:inputType="textMultiLine"
-            android:lines="4"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="16dp"
-        />
+            android:maxLines="4"
+            android:minLines="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintEnd_toStartOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toggle_ru_mask" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="10dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button"
+            android:layout_marginBottom="70dp"/>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="48dp"
+            android:layout_height="58dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:onClick="sendMessage"
+            app:backgroundTint="@color/teal_700"
+            app:cornerRadius="30dp"
+            app:icon="@drawable/ic_baseline_send_24"
+            app:iconTint="?android:attr/textColorSecondaryInverse"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -76,23 +115,9 @@
             android:id="@+id/anonim"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
             android:text="@string/anonim"
             android:textColor="#706C6C"
             android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="16dp"
-            android:onClick="sendMessage"
-            android:text="@string/send"
-            android:textColor="?android:attr/textColorSecondaryInverse"
-            app:backgroundTint="@color/grey_sweet_500"
-            app:icon="@drawable/ic_baseline_send_24"
-            app:iconTint="?android:attr/textColorSecondaryInverse" />
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
