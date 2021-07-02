@@ -45,7 +45,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    public String postUrl= "http://192.168.0.10:8080/add_message";
+    public String postUrl= "http://18.217.19.171:8080/add_message";
     private UserData userData;
     private ReceiveMessage receiveMessage;
     MessageViewModel mMessageViewModel;

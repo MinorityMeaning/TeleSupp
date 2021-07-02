@@ -30,7 +30,7 @@ public class ReceiveMessage {
     public void getReceiveRequest(String user, UserData userData) {
 
         Request request = new Request.Builder()
-                .url("http://192.168.0.10:8080/tuk_tuk/" + user)
+                .url("http://18.217.19.171:8080/tuk_tuk/" + user)
                 .method("GET", null)
                 .build();
 
