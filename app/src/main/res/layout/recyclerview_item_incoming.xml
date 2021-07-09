@@ -8,7 +8,7 @@
     android:paddingBottom="4dp">
 
     <LinearLayout
-        android:id="@+id/linear_layout_incoming"
+        android:id="@+id/linear_layout_message_box"
         style="@style/word_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,18 +17,15 @@
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingTop="4dp"
-        android:paddingRight="10dp"
         android:paddingBottom="20dp"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        android:elevation="2dp"
         >
 
         <TextView
             android:id="@+id/text_view_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
             android:textColor="@color/teal_700"
             android:textSize="11sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,8 +35,7 @@
             android:id="@+id/text_view_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:text="+79245714142"
+            android:maxWidth="280dp"
             android:textColor="?android:attr/textColorSecondaryInverse"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,8 +49,17 @@
         android:padding="10dp"
         android:textSize="9sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/linear_layout_incoming"
+        app:layout_constraintStart_toEndOf="@+id/linear_layout_message_box"
         tools:ignore="SmallSp" />
+
+    <CheckBox
+        android:id="@+id/message_check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

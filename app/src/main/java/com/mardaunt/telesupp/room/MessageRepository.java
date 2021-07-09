@@ -1,6 +1,7 @@
 package com.mardaunt.telesupp.room;
 
 import android.app.Application;
+import android.os.Messenger;
 
 import androidx.lifecycle.LiveData;
 
@@ -32,6 +33,12 @@ class MessageRepository {
     void insert(Message message) {
         MessageRoomDatabase.databaseWriteExecutor.execute(() -> {
             mMessageDao.insert(message);
+        });
+    }
+
+    void delete(Message message) {
+        MessageRoomDatabase.databaseWriteExecutor.execute(() ->{
+            mMessageDao.delete(message);
         });
     }
 }

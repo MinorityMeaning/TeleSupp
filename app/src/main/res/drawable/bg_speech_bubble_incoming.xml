@@ -4,7 +4,7 @@
     <!--Shadow Layer-->
 
 
-    <item android:right="10dp">
+    <item android:right="0dp">
         <shape android:shape="rectangle">
             <corners android:radius="10dp" />
             <padding
@@ -18,7 +18,7 @@
     <!--===============-->
 
 
-    <item android:right="10dp">
+    <item android:right="0dp">
         <shape android:shape="rectangle">
             <corners android:radius="10dp" />
             <padding android:bottom="1px" />
@@ -29,7 +29,7 @@
     <!--===============-->
 
 
-    <item android:right="10dp">
+    <item android:right="0dp">
         <shape android:shape="rectangle">
             <corners android:radius="10dp" />
             <padding
@@ -46,7 +46,7 @@
     <!--ForeGround-->
 
 
-    <item android:right="10dp">
+    <item android:right="0dp">
         <shape android:shape="rectangle">
             <solid android:color="@color/grey_sweet_500" />
             <corners android:bottomLeftRadius="0dp" android:radius="10dp" />

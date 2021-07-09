@@ -9,8 +9,7 @@ import java.util.List;
 
 public class MessageViewModel extends AndroidViewModel {
 
-    private MessageRepository mRepository;
-
+    private final MessageRepository mRepository;
     private final LiveData<List<Message>> mAllMessages;
 
     public MessageViewModel (Application application) {
@@ -22,5 +21,7 @@ public class MessageViewModel extends AndroidViewModel {
     public LiveData<List<Message>> getAllMessages() { return mAllMessages; }
 
     public void insert(Message message) { mRepository.insert(message); }
+
+    public void delete(Message message) { mRepository.delete(message); }
 }
 

@@ -56,7 +56,7 @@ public class ReceiveMessage {
                                                             new Date());
                             mMessageViewModel.insert(mes);
                         }
-                        System.out.println("Длина: " + json.length());
+                        //System.out.println("Длина: " + json.length());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

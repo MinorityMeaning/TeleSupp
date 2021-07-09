@@ -28,7 +28,6 @@
         android:background="@drawable/shadow_bottom"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:elevation="2dp"
         >
 
         <EditText
@@ -116,24 +115,46 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:padding="8dp">
 
-        <CheckBox
-            android:id="@+id/anonim"
+    <CheckBox
+        android:id="@+id/anonim"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:background="@drawable/rounded_edit_text"
+        android:text="@string/anonim"
+        android:textColor="#ACACAC"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageView
+            android:id="@+id/trash_button"
             android:layout_width="wrap_content"
-            android:layout_height="38dp"
-            android:background="@drawable/rounded_edit_text"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:text="@string/anonim"
-            android:textColor="#ACACAC"
-            android:textSize="14sp"
-             />
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:onClick="deleteMessage"
+            android:visibility="gone"
+            android:src="@drawable/ic_baseline_restore_from_trash_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/close_button"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/close_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="hideIcons"
+            android:visibility="gone"
+            android:src="@drawable/ic_baseline_close_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"

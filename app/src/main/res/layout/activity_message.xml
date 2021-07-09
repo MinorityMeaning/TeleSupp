@@ -2,30 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:weightSum="1"
-    android:padding="50dp"
-    android:background="@color/grey_sweet_500">
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/text_edit_layout_phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/_7_xxx_xxx_xx_xx"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        app:boxBackgroundColor="@color/white"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_phone"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
+    >
 
 </LinearLayout>

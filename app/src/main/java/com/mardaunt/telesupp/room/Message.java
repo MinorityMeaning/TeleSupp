@@ -2,6 +2,7 @@ package com.mardaunt.telesupp.room;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
@@ -18,6 +19,9 @@ public class Message {
     private String nature;
     private String service;
     private Date date;
+
+    @Ignore
+    public boolean isSelected;
 
     public Message(int id,
                    @NonNull String phone,

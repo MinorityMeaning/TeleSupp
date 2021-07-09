@@ -15,10 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mardaunt.telesupp.MainActivity;
 import com.mardaunt.telesupp.MaskPhone;
 import com.mardaunt.telesupp.R;
+import com.mardaunt.telesupp.recyclerview.HelperAdapter;
 import com.mardaunt.telesupp.recyclerview.MessageListAdapter;
 import com.mardaunt.telesupp.room.MessageViewModel;
 
 public class WhatsAppFragment extends Fragment {
+
+    private final MainActivity mainActivity = (MainActivity) getContext();
 
     public static WhatsAppFragment newInstance() {
         return new WhatsAppFragment();
@@ -41,7 +44,7 @@ public class WhatsAppFragment extends Fragment {
 
         //Настраиваем RecyclerView для сообщений
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
-        final MessageListAdapter adapter = new MessageListAdapter(new MessageListAdapter.MessageDiff());
+        final MessageListAdapter adapter = new MessageListAdapter(new MessageListAdapter.MessageDiff(), HelperAdapter.getHelperAdapter());
         recyclerView.setAdapter(adapter);
             //Настроим прокрутку до последнего сообщения.
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -55,7 +58,7 @@ public class WhatsAppFragment extends Fragment {
             adapter.submitList(messages);
         });
             //Передадим mMessageViewModel для MainActivity
-        ((MainActivity) getContext()).setMessageViewModel(mMessageViewModel);
+        HelperAdapter.getHelperAdapter().setMessageViewModel(mMessageViewModel);
 
         return view;
     }

@@ -34,6 +34,7 @@ import okhttp3.Response;
 
 import com.mardaunt.telesupp.fragments.WhatsAppFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.mardaunt.telesupp.recyclerview.HelperAdapter;
 import com.mardaunt.telesupp.recyclerview.MessageListAdapter;
 import com.mardaunt.telesupp.room.Message;
 import com.mardaunt.telesupp.room.MessageViewModel;
@@ -48,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
     public String postUrl= "http://18.217.19.171:8080/add_message";
     private UserData userData;
     private ReceiveMessage receiveMessage;
-    MessageViewModel mMessageViewModel;
+    private MessageViewModel mMessageViewModel;
+    private HelperAdapter helperAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fl_content, WhatsAppFragment.newInstance());
         ft.commit();
+            //Настраиваем helperAdapter
+        helperAdapter = HelperAdapter.getHelperAdapter();
+        helperAdapter.setMainActivity(this);
             //Объект данных пользователя
         userData = new UserData(this);
         userData.createUser();
@@ -79,13 +84,8 @@ public class MainActivity extends AppCompatActivity {
         receiveMessage = new ReceiveMessage(mMessageViewModel);
         receiveMessage.getReceiveRequest(userData.getUserId(), userData);
 
-    }
+        mMessageViewModel = helperAdapter.getMessageViewModel();
 
-    public void setMessageViewModel(MessageViewModel mVm) {
-        mMessageViewModel = mVm;
-    }
-    public MessageViewModel getMessageViewModel(){
-        return mMessageViewModel;
     }
 
     private void postRequest(String postUrl,String phone, String message) {
@@ -141,6 +141,8 @@ public class MainActivity extends AppCompatActivity {
         if(!checkBox.isChecked()) {(new SendOnWhatsApp(phone, message, this)).send(); return;}
             //Room SQL
         Message mes = new Message(0,phone, message, "outgoing", "WhatsApp", new Date());
+        System.out.println(mes.getPhone());
+        System.out.println(mMessageViewModel.getAllMessages());
         mMessageViewModel.insert(mes);
 
         //Если checkBox отмечен то продолжим серверную отправку.
@@ -156,24 +158,41 @@ public class MainActivity extends AppCompatActivity {
      public void onToggleRuMask(View view) {
         boolean on = ((ToggleButton) view).isChecked();
         if (on) {
-            MaskPhone.setUpMaskRu(findViewById(R.id.edit_phone));
+            EditText input = findViewById(R.id.edit_phone);
+            MaskPhone.setUpMaskRu(input);
             ToggleButton toggle = findViewById(R.id.toggle_all_mask);
             toggle.setChecked(false);
-            EditText input = findViewById(R.id.edit_phone);
+            input.setText("");
             input.setHint(R.string._7_xxx_xxx_xx_xx);
-        }
+        } else ((ToggleButton) view).setChecked(true);
     }
 
         // ОнКлик включателя маски для всех стран
     public void onToggleAllMask(View view) {
         boolean on = ((ToggleButton) view).isChecked();
         if (on) {
-            MaskPhone.setUpMaskAll(findViewById(R.id.edit_phone));
+            EditText input = findViewById(R.id.edit_phone);
+            MaskPhone.setUpMaskAll(input);
             ToggleButton toggle = findViewById(R.id.toggle_ru_mask);
             toggle.setChecked(false);
-            EditText input = findViewById(R.id.edit_phone);
+            input.setText("");
             input.setHint(R.string._x_xxx_xxx_xx_xx);
-        }
+        } else ((ToggleButton) view).setChecked(true);
     }
 
+        // ОнКлик для иконки корзины
+    public void deleteMessage(View view){
+        helperAdapter.deleteSelected();
+    }
+
+        // ОнКлик для иконки крестика
+    public void hideIcons(View view) {
+        findViewById(R.id.trash_button).setVisibility(View.GONE);
+        findViewById(R.id.close_button).setVisibility(View.GONE);
+
+        for (CheckBox checkBox: helperAdapter.getSetCheckBox()) {
+            if (checkBox.isChecked()) checkBox.setChecked(false);
+            checkBox.setVisibility(View.GONE);
+        }
+    }
 }
