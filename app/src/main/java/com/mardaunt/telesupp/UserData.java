@@ -13,11 +13,20 @@ public class UserData {
 
     UserData(MainActivity mainActivity){this.mainActivity = mainActivity;}
 
+    private static UserData userData;
+
     private final MainActivity mainActivity;
     private SharedPreferences sPref;
     private SharedPreferences.Editor editor;
     final private String USER_ID = "user_id";
 
+    public static void create(MainActivity activity) {
+        if (userData == null) userData = new UserData(activity);
+    }
+
+    public static UserData getUserData() {
+        return userData;
+    }
 
     void createUser() {
         sPref = mainActivity.getSharedPreferences("UserData", Context.MODE_PRIVATE);

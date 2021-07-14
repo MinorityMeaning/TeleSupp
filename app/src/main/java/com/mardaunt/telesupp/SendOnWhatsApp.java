@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.util.Log;
 
 public class SendOnWhatsApp {
     SendOnWhatsApp(String phone, String message, Activity mainActivity) {
@@ -31,7 +32,7 @@ public class SendOnWhatsApp {
                 mainActivity.startActivity(i);
             //}
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.d("ErrorSendOnWhatsApp", e.getMessage());
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.mardaunt.telesupp;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
+
 import com.mardaunt.telesupp.room.Message;
 import com.mardaunt.telesupp.room.MessageViewModel;
 import org.json.JSONException;
@@ -20,14 +22,37 @@ public class ReceiveMessage {
             .build();
     String answer;
     JSONObject json;
+    boolean looping;
+    UserData userData;
     MessageViewModel mMessageViewModel;
 
     ReceiveMessage(MessageViewModel mMessageViewModel) {
         this.mMessageViewModel = mMessageViewModel;
+        this.looping = true;
+        this.userData = UserData.getUserData();
+    }
+
+    public void setStatusLooping(boolean status) {
+        looping = status;
+    }
+
+    public void startSendRequests() {
+
+        new Thread(() -> {
+            while (looping) {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                getReceiveRequest(userData.getUserId());
+            }
+        }).start();
     }
 
 
-    public void getReceiveRequest(String user, UserData userData) {
+
+    public void getReceiveRequest(String user) {
 
         Request request = new Request.Builder()
                 .url("http://18.217.19.171:8080/tuk_tuk/" + user)
@@ -56,11 +81,9 @@ public class ReceiveMessage {
                                                             new Date());
                             mMessageViewModel.insert(mes);
                         }
-                        //System.out.println("Длина: " + json.length());
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        Log.d("ErrorGetReceiveRequest", e.getMessage());
                     }
-                //Log.d("TAG",response.body().string());
             }
         });
     }

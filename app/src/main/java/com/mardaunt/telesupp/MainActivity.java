@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
     public String postUrl= "http://18.217.19.171:8080/add_message";
     private UserData userData;
-    private ReceiveMessage receiveMessage;
     private MessageViewModel mMessageViewModel;
     private HelperAdapter helperAdapter;
 
@@ -65,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
         helperAdapter = HelperAdapter.getHelperAdapter();
         helperAdapter.setMainActivity(this);
             //Объект данных пользователя
-        userData = new UserData(this);
+        UserData.create(this);
+        userData = UserData.getUserData();
         userData.createUser();
             //Настраиваем слушатель для нижнего меню. Передадим объекту меню userData,
            // чтобы работать с данными пользователя внутри других фрагментов.
@@ -80,9 +80,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        //Объект для запросов входящих сообщений
-        receiveMessage = new ReceiveMessage(mMessageViewModel);
-        receiveMessage.getReceiveRequest(userData.getUserId(), userData);
+        //Старт сервиса для запроса входящих сообщений. Периодичность 5 сек.
+        startService(new Intent(this, GetMessageService.class));
 
         mMessageViewModel = helperAdapter.getMessageViewModel();
 
@@ -100,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             jsonObject.put("user", userData.getUserId());
             jsonObject.put("status", "ok"); // Багаж для исполнителя automagic
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d("ErrorPutInJSON", e.getMessage());
         }
 
         MediaType mediaType = MediaType.parse("application/json");
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 assert response.body() != null;
-                Log.d("TAG",response.body().string());
+                Log.d("ErrorPostRequest",response.body().string());
             }
         });
     }
