@@ -12,13 +12,17 @@ import com.mardaunt.telesupp.R;
 import com.mardaunt.telesupp.room.Message;
 import com.mardaunt.telesupp.room.TimeStampConverter;
 
+import java.util.HashSet;
+
 public class MessageListAdapter extends ListAdapter<Message, MessageViewHolder> {
 
     HelperAdapter helperAdapter;
+    HashSet<Message> listMessageForDelete;
 
     public MessageListAdapter(@NonNull DiffUtil.ItemCallback<Message> diffCallback, HelperAdapter helperAdapter) {
         super(diffCallback);
         this.helperAdapter = helperAdapter;
+        listMessageForDelete = helperAdapter.getListMessageForDelete();
     }
 
     @Override
@@ -67,7 +71,12 @@ public class MessageListAdapter extends ListAdapter<Message, MessageViewHolder> 
         });
             // Установим слушатели для чекбоксов, которые переключают переменную isSelected
         holder.getMessageCheckBox().setOnClickListener(v -> {
-            current.isSelected = ((CheckBox) v).isChecked();
+            if (((CheckBox) v).isChecked())
+                listMessageForDelete.add(current);
+            else
+                listMessageForDelete.remove(current);
+
+            //current.isSelected = ((CheckBox) v).isChecked();
 
             helperAdapter.addCheckBox((CheckBox) v);
         });

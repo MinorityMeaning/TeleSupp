@@ -16,4 +16,12 @@
         <item name="android:padding">8dp</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
     </style>
+
+    <!-- Background for Splash Screen Activity -->
+    <style name="Theme.HelloApp.Launcher">
+        <item name="android:windowBackground">@drawable/background_splash_screen</item>
+        <!-- для Android 5+ вы можете поменять цвет colorPrimaryDark, чтобы соответствовать цвету windowBackground -->
+        <!-- <item name="colorPrimaryDark">@android:color/white</item> -->
+    </style>
+
 </resources>

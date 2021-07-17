@@ -11,21 +11,25 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HelloApp"
-        android:usesCleartextTraffic="true"
-        >
+        android:windowBackground="@drawable/background_splash_screen"
+        android:usesCleartextTraffic="true">
 
-        <service android:enabled="true" android:name=".GetMessageService" />
+        <service
+            android:name=".GetMessageService"
+            android:enabled="true" />
 
-        <activity android:name="com.mardaunt.telesupp.MainActivity"
-                  android:windowSoftInputMode="adjustPan"
-                  android:screenOrientation="portrait"
-            >
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.HelloApp.Launcher"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

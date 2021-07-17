@@ -22,26 +22,27 @@ public class HelperAdapter {
     private MessageViewModel mMessageViewModel;
     private MainActivity mainActivity;
     private final HashSet<CheckBox> listCheckBox = new HashSet<>();
+    private final HashSet<Message> listMessageForDelete = new HashSet<>();
 
     public void deleteSelected() {
-        LiveData<List<Message>> temp = mMessageViewModel.getAllMessages();
-        List<Message> allMessages = temp.getValue();
 
-        if (allMessages != null)
-        for(Message message: allMessages)
-            if(message.isSelected)
-                mMessageViewModel.delete(message);
+        for (Message message : listMessageForDelete)
+            mMessageViewModel.delete(message);
+        listMessageForDelete.clear();
 
         // Скроем иконку корзины и чекбоксы
         mainActivity.findViewById(R.id.trash_button).setVisibility(View.GONE);
         mainActivity.findViewById(R.id.close_button).setVisibility(View.GONE);
         for (CheckBox checkBox: listCheckBox)
+            if(checkBox != null)              // Могут остаться старые удалённые чекбоксы. Или нет?
             checkBox.setVisibility(View.GONE);
     }
 
     public void setMessageViewModel(MessageViewModel messageViewModel){
         mMessageViewModel = messageViewModel;
     }
+
+    public HashSet<Message> getListMessageForDelete() {return listMessageForDelete;}
 
     public MessageViewModel getMessageViewModel() { return mMessageViewModel; }
 

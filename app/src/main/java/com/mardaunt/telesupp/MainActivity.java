@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_HelloApp);
         setContentView(R.layout.activity_main);
 
             //Изначально подгружаем fragment_whatsapp.xml
@@ -193,5 +194,8 @@ public class MainActivity extends AppCompatActivity {
             if (checkBox.isChecked()) checkBox.setChecked(false);
             checkBox.setVisibility(View.GONE);
         }
+            // Отчистим корзину сообщений для удаления
+        HelperAdapter.getHelperAdapter().getListMessageForDelete()
+                                        .clear();
     }
 }
