@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!-- Атрибут android:opacity=”opaque” крайне важен для предотвращения черных миганий при переходе к вашей теме -->
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:opacity="opaque">
 
     <!-- Цвет фона, предпочтительно как в главной теме -->
     <item android:drawable="@color/grey_sweet_500"/>
 
-    <!-- Лого приложения -->
-    <item>
-
+    <!-- Лого приложения - 144dp версия иконки приложения -->
+    <item
+        android:width="200dp"
+        android:height="200dp"
+        android:gravity="center"
+        >
         <bitmap
-            android:src="@mipmap/ic_splash_banner"
-            android:gravity="center"/>
-
+            android:src="@drawable/ic_splash_banner"
+           />
     </item>
 
 </layer-list>
